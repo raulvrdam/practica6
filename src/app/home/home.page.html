@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Práctica 6
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="!mostrarEmpleados">
+    <ion-list>
+      <ion-radio-group [(ngModel)]="categoria">
+        <ion-list-header>
+          <ion-label>Categoría</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Analista</ion-label>
+          <ion-radio slot="start" value="analista"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Programador Junior</ion-label>
+          <ion-radio slot="start" value="programador_junior"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Programador Senior</ion-label>
+          <ion-radio slot="start" value="programador_senior"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-item>
+      <ion-label position="stacked">Sueldo mayor a:</ion-label>
+      <ion-input placeholder="Introduzca un valor" [(ngModel)]="sueldo" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox slot="start" [(ngModel)]="enPracticas"></ion-checkbox>
+      <ion-label>En prácticas</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ciudades</ion-label>
+      <ion-select [(ngModel)]="ciudad">
+        <ion-select-option *ngFor="let ciudad of ciudades">{{ ciudad }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-button expand="block" (click)="buscar()">Buscar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button expand="block" (click)="buscarAvanzado()">Buscar Avanzado</ion-button>
+    </ion-item>
+  </div>
+  <div *ngIf="mostrarEmpleados">
+    <ion-card *ngFor="let empleado of empleadosSeleccionados">
+      <ion-label>Nombre: {{empleado.nombre}} {{empleado.apellidos}} <br>
+        Categoria: {{empleado.categoria}} <br>
+        Sueldo: {{empleado.sueldo}} <br>
+        Ciudad: {{empleado.ciudad}} <br>
+        En prácticas: {{empleado.practicas}}
+      </ion-label> 
+      <ion-label></ion-label>
+    </ion-card>
+    <ion-item>
+      <ion-button expand="block" (click)="volver()">Volver</ion-button>
+    </ion-item>
+  </div>
+</ion-content>
